@@ -176,7 +176,7 @@ short SuspectIDs[] = {
 #define CAN_BRIDGE_EXCLUDE_TEST 1
 
 //Enable/Disable test mode
-#define CAN_TESTING
+//#define CAN_TESTING
 
 
 #ifdef CAN_TESTING
@@ -222,9 +222,13 @@ void CAN0rxFrame(CAN_FRAME *frame)
   CANactivity(0);
   CAN_rxBuffer[0].push(*frame);
   if(CAN_BRIDGE_TRANSPARENT_01){
+    #ifdef CAN_TESTING
     if((CAN_BRIDGE_EXCLUDE_TEST && (frame->id != Can0_TestFrame.id) && (frame->id != Can1_TestFrame.id)) || (!CAN_BRIDGE_EXCLUDE_TEST)){
+    #endif
       CAN_txBuffer[1].push(*frame);
+    #ifdef CAN_TESTING
     };    
+    #endif
   };
   CANactivity(0);
 }
@@ -234,9 +238,13 @@ void CAN1rxFrame(CAN_FRAME *frame)
   CANactivity(1);
   CAN_rxBuffer[1].push(*frame);
   if(CAN_BRIDGE_TRANSPARENT_10){
+    #ifdef CAN_TESTING
     if((CAN_BRIDGE_EXCLUDE_TEST && (frame->id != Can0_TestFrame.id) && (frame->id != Can1_TestFrame.id))){
+    #endif
       CAN_txBuffer[0].push(*frame);
+    #ifdef CAN_TESTING
     };
+    #endif
   };
   CANactivity(1);
 }
