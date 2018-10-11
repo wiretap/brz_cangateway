@@ -112,29 +112,29 @@ short SuspectIDs[] = {
   0x773, 
   0x774, 
   0x775, 
-  0x140, //TX?: byte AccelPedalPositionA, long RPM, byte AccelPedalPositionB, byte AccelPedalPositionC, ?
-  0x141, //TX?:
+  0x140, //TX?: 0 byte AccelPedalPositionA, 1 byte Flags (8 bit clutch), 2 long RPM, 4 byte AccelPedalPositionB, 5 byte AccelPedalPositionC, ?
+  0x141, //TX?: 6 byte GearIndicator
   0x142, //TX?:
-  0x144, //TX?:
+  0x144, //TX?: 2 byte OilTemp, 3 byte CoolantTemp
   0x360, //TX?:
   0x361, //TX?:
   0x4C1, //TX?:
-  0xD1,
+  0xD1,  //RX : 0 long VehicleSpeed, 2 byte BrakePedalPressure
   0xD2,
   0xD3,
-  0xD4,
+  0xD4,  //RX : 0 long VSS_LF, 2 long VSS_RF, 4 long VSS_LR, 6 long VSS_RR
   0x148,
   0x149,
   0x14A,
   0x368,
-  0x152,
+  0x152, //RX : 8 byte LightingControl/Wipers
   0x63B,
   0x280,
   0x282,
   0x370,
   0x372,
   0x720,
-  0xD0
+  0xD0   //RX : 0 long Steering Angle
 };
 
 
